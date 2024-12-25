@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="homeContainer">
+    <div class="socialIcons" *ngIf="isMobile">
+      <div class="button fbBtn">
+        <div class="icon">
+          <i class="bx bxl-facebook" (click)="redirectToFB()"></i>
+        </div>
+        <span>Facebook</span>
+      </div>
+      <div class="button linBtn">
+        <div class="icon" (click)="redirectToLinkdin()">
+          <i class="bx bxl-linkedin"></i>
+        </div>
+        <span>Linkedin</span>
+      </div>
+      
+      <div class="button gitBtn">
+        <div class="icon">
+          <i class="bx bxl-github" (click)="redirectToGithub()"></i>
+        </div>
+        <span>Github</span>
+      </div>
+      
+    </div>
+    <div class="homeContent">
+      <h1
+        class="name"
+        data-aos="fade-right"
+        data-aos-delay="300"
+        data-aos-duration="1000"
+        data-aos-easing="ease forwards"
+        data-aos-offset="100"
+        data-aos-once="true"
+      >
+        Hi, I'm Zakaria Yousfi 
+      </h1>
+      <div class="info">
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis
+          facere praesentium dolorum quam ipsum tempore ducimus animi dolores,
+          saepe quisquam aliquam, cum expedita sunt. Fuga totam quis qui
+          accusantium fugit?
+        </p>
+      </div>
+      <div class="btn">
+        <button (click)="redirectToProject()"><span></span> Projects</button>
+      </div>
+    </div>
+    <div class="email" *ngIf="isMobile">
+      <a href="mailto:zakariayousfiss@gmail.com">Zakaria Yousfi</a>
+    </div>
+    <div class="scrollDown" (click)="redirectToAbout()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</div>
