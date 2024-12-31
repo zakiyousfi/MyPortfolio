@@ -5,7 +5,7 @@ import emailjs from '@emailjs/browser';
 import { environment } from 'src/environments/environment';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { Router } from '@angular/router';
-import axios from 'axios';
+import axios from 'axios'; // Install Axios via npm if not already installed
 
 @Component({
   selector: 'app-contact',
@@ -17,9 +17,8 @@ export class ContactComponent {
   key = environment.emailJSKey;
   serviceId = environment.mailService;
   templateId = environment.templateId;
-  toMail: string = 'Zaki';
 
-  contactForm: any = FormGroup;
+  contactForm: any=FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -35,31 +34,37 @@ export class ContactComponent {
       message: [null, [Validators.minLength(20)]],
     });
   }
-  async fetchLocation(): Promise<any> {
-    try {
-      const response = await axios.get('http://ip-api.com/json/');
-      return response.data; // Returns location data such as city, region, country, and IP.
-    } catch (error) {
-      console.error('Error fetching IP location:', error);
-      return null;
-    }
-  }
 
   onSubmit = async (): Promise<void> => {
     emailjs.init(this.key);
-
     const formData = this.contactForm.value;
 
-    // Fetch the user's location using their IP
-    const locationData = await this.fetchLocation();
-    let response = await emailjs.send(this.serviceId, this.templateId, {
-      from_name: formData.name,
-      to_name: this.toMail,
-      from_email: formData.email,
-      subject: formData.subject,
-      message: formData.message,
-    });
-    this.router.navigate(['/confirm']);
-    this.contactForm.reset();
+    try {
+      // Fetch user location via IP (replace API_KEY with your IP service key)
+      const locationResponse = await axios.get(
+        'https://ipinfo.io/json?token=ed88985f97a406'
+      );
+
+      const locationData = locationResponse.data;
+
+      const submissionData = {
+        from_name: formData.name,
+        to_name: formData.name, // User's name
+        from_email: formData.email,
+        to_email: formData.email, // Send email to the user
+        subject: formData.subject,
+        message: formData.message,
+        location: `${locationData.city}, ${locationData.region}, ${locationData.country}`,
+      };
+
+      const response = await emailjs.send(this.serviceId, this.templateId, submissionData);
+
+      this.snackbar.openSnackBar('Your message was sent successfully!', 'success');
+      this.router.navigate(['/confirm']);
+      this.contactForm.reset();
+    } catch (error) {
+      console.error('Error during form submission:', error);
+      this.snackbar.openSnackBar('Failed to send your message. Try again later.', 'error');
+    }
   };
 }
