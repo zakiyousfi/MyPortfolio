@@ -9,63 +9,44 @@ import { environment } from 'src/environments/environment';
 })
 export class ProjectsComponent {
   firstPoject: Tools[] = [
-    {
-      name: 'Java',
-    },
-    {
-      name: 'Spring boot',
-    },
-    {
-      name: 'Angular',
-    },
-    {
-      name: 'Strapi',
-    },
-    {
-      name: 'AWS',
-    },
-    {
-      name: 'Docker',
-    },
+   
     {
       name: 'GIT',
     },
     {
-      name: 'Gitlab',
+      name: 'Html',
+    },
+    {
+      name: 'CSS',
+    },
+    {
+      name: 'JS',
+    },
+    {
+      name: 'Bootstrap',
+    },
+    {
+      name: 'GitHub',
     },
   ];
 
   secoundProject: Tools[] = [
     {
-      name: 'Java',
+      name: 'Git',
     },
     {
-      name: 'Spring boot',
+      name: 'HTML',
     },
     {
-      name: 'React',
+      name: 'CSS',
     },
     {
-      name: 'Jhipster',
+      name: 'JS',
     },
     {
-      name: 'Redis',
+      name: 'BootStrap',
     },
-    {
-      name: 'ActiveMQ',
-    },
-    {
-      name: 'Apache Camel',
-    },
-    {
-      name: 'Docker',
-    },
-    {
-      name: 'Grafana',
-    },
-    {
-      name: 'GIT',
-    },
+    
     {
       name: 'GITHub',
     },
@@ -79,13 +60,13 @@ export class ProjectsComponent {
       name: 'SCSS',
     },
     {
-      name: 'TypeScript',
+      name: 'JS',
     },
     {
-      name: 'Angular',
+      name: 'GIT',
     },
     {
-      name: 'Aungular Material',
+      name: ' BootStrap',
     },
   ];
   FourProject: Tools[] = [
@@ -103,6 +84,15 @@ export class ProjectsComponent {
     },
     {
       name: 'Aungular Material',
+    },
+    {
+      name: 'Git',
+    },
+    {
+      name: 'GitHub',
+    },
+    {
+      name: 'BootStrap',
     },
   ];
 
