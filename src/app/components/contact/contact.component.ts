@@ -18,7 +18,7 @@ export class ContactComponent {
   serviceId = environment.mailService;
   templateId = environment.templateId;
 
-  contactForm: any=FormGroup;
+  contactForm: any = FormGroup;
 
   constructor(
     private fb: FormBuilder,
@@ -47,17 +47,19 @@ export class ContactComponent {
 
       const locationData = locationResponse.data;
 
-      const submissionData = {
-        from_name: formData.name,
-        to_name: formData.name, // User's name
-        from_email: formData.email,
-        to_email: formData.email, // Send email to the user
-        subject: formData.subject,
-        message: formData.message,
-        location: `${locationData.city}, ${locationData.region}, ${locationData.country}`,
+      // Construct the email object with dynamic to_email
+      const templateParams = {
+        from_name: formData.name,           // User's name
+        to_email: formData.email,           // Send email to the user's email address
+        from_email: formData.email,         // Sender's email (user's email)
+        to_name: formData.name,             // Receiver's name (user's name)
+        subject: formData.subject,          // Subject entered by the user
+        message: formData.message,          // Message entered by the user
+        location: `${locationData.city}, ${locationData.region}, ${locationData.country}`, // Location info
       };
 
-      const response = await emailjs.send(this.serviceId, this.templateId, submissionData);
+      // Send email to the user
+      const response = await emailjs.send(this.serviceId, this.templateId, templateParams);
 
       this.snackbar.openSnackBar('Your message was sent successfully!', 'success');
       this.router.navigate(['/confirm']);
