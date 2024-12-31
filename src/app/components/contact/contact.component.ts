@@ -5,6 +5,7 @@ import emailjs from '@emailjs/browser';
 import { environment } from 'src/environments/environment';
 import { SnackbarService } from 'src/app/services/snackbar.service';
 import { Router } from '@angular/router';
+import axios from 'axios';
 
 @Component({
   selector: 'app-contact',
@@ -16,7 +17,7 @@ export class ContactComponent {
   key = environment.emailJSKey;
   serviceId = environment.mailService;
   templateId = environment.templateId;
-  toMail: string = 'Juyel';
+  toMail: string = 'Zaki';
 
   contactForm: any = FormGroup;
 
@@ -34,10 +35,23 @@ export class ContactComponent {
       message: [null, [Validators.minLength(20)]],
     });
   }
+  async fetchLocation(): Promise<any> {
+    try {
+      const response = await axios.get('http://ip-api.com/json/');
+      return response.data; // Returns location data such as city, region, country, and IP.
+    } catch (error) {
+      console.error('Error fetching IP location:', error);
+      return null;
+    }
+  }
 
   onSubmit = async (): Promise<void> => {
     emailjs.init(this.key);
+
     const formData = this.contactForm.value;
+
+    // Fetch the user's location using their IP
+    const locationData = await this.fetchLocation();
     let response = await emailjs.send(this.serviceId, this.templateId, {
       from_name: formData.name,
       to_name: this.toMail,
