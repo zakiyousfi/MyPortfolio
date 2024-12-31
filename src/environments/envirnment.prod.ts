@@ -4,8 +4,6 @@ export const environment = {
   // socialLinks
 
   fbLink: 'Enter your social link',
-  instaLink: 'Enter your social link',
-  youtubeLink: 'Enter your social link',
   linkedinLink: 'Enter your social link',
   githubLink: 'Enter your social link',
 
